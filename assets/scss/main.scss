@@ -1,0 +1,91 @@
+@import "config";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,700;1,400;1,700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: $Off_white;
+    font-family: poppins, Arial, "Helvetica Neue", Helvetica, sans-serif;
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    transform: translateY(120px);
+    margin: auto;
+    background-color: $White;
+    width: 700px;
+    height: 525px;
+    padding: 50px;
+    border-radius: 1.05rem 1.05rem 8rem 1.05rem;
+
+    &__input{
+        display: flex;
+        & label{
+            display: block;
+            font-size: .75rem;
+            color: $Smokey_grey;
+            letter-spacing: .2rem;
+        }
+
+        .field{
+            height: 55px;
+            width: 130px;
+            padding-left: 20px;
+            margin-right: 30px;
+            margin-top: 5.5px;
+            font-size: 26px;
+            font-weight: 700;
+            border-radius: 0.3rem;
+            border-color: $Light_grey; 
+            border-style: solid;
+            cursor: pointer;
+        }
+        
+    }
+
+    &__divider{
+        width: 100%;
+        height: 2px;
+        background-color: $Light_grey;
+        margin: 2.2rem 0;
+        &__btn{
+            position: relative;
+            border-radius: 50%;
+            height: 75px;
+            width: 75px;
+            top: -33px;
+            left: 90%;
+            border: none;
+            background-color: $primarycolor1;
+            cursor: pointer;
+
+            & img {
+                width: 40px;
+            }
+        }
+        &__btn:active{
+            background-color: $Off_black;
+        }
+        &__btn:hover{
+            background-color: $Off_black;
+        }
+    }
+    
+    &__result {
+        font-size: 2.6rem;
+        font-weight: 900;
+        font-style: italic;
+        line-height: 5.8rem;
+
+        .result{
+            color: $primarycolor1;
+        }
+    }
+}
