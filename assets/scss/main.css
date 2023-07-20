@@ -22,15 +22,18 @@ body {
   height: 525px;
   padding: 50px;
   border-radius: 1.05rem 1.05rem 8rem 1.05rem;
+  transition: all 0.5s ease-in-out;
 }
 .container__input {
   display: flex;
+  transition: all 0.5s ease-in-out;
 }
 .container__input label {
   display: block;
   font-size: 0.75rem;
   color: hsl(0, 1%, 44%);
   letter-spacing: 0.2rem;
+  transition: all 0.5s ease-in-out;
 }
 .container__input .field {
   height: 55px;
@@ -44,12 +47,14 @@ body {
   border-color: hsl(0, 0%, 86%);
   border-style: solid;
   cursor: pointer;
+  transition: all 0.5s ease-in-out;
 }
 .container__divider {
   width: 100%;
-  height: 2px;
+  height: 1px;
   background-color: hsl(0, 0%, 86%);
   margin: 2.2rem 0;
+  transition: all 0.5s ease-in-out;
 }
 .container__divider__btn {
   position: relative;
@@ -61,9 +66,11 @@ body {
   border: none;
   background-color: hsl(259, 100%, 65%);
   cursor: pointer;
+  transition: all 0.5s ease-in-out;
 }
 .container__divider__btn img {
   width: 40px;
+  transition: all 0.5s ease-in-out;
 }
 .container__divider__btn:active {
   background-color: hsl(0, 0%, 8%);
@@ -76,7 +83,80 @@ body {
   font-weight: 900;
   font-style: italic;
   line-height: 5.8rem;
+  transition: all 0.5s ease-in-out;
 }
 .container__result .result {
   color: hsl(259, 100%, 65%);
+}
+
+@media screen and (max-width: 750px) {
+  .container {
+    transform: translateY(88px);
+    width: 90%;
+    height: 490px;
+    padding: 40px 20px;
+    border-bottom-right-radius: 6 rem;
+  }
+  .container__input {
+    justify-content: space-between;
+  }
+  .container__input .field {
+    width: 23vw;
+  }
+  .container__divider {
+    margin: 3.67rem 0;
+  }
+  .container__divider__btn {
+    height: 65px;
+    width: 65px;
+    left: 40%;
+  }
+  .container__divider__btn img {
+    width: 26px;
+  }
+  .container__result {
+    font-size: 2rem;
+    line-height: 4rem;
+  }
+  .attribution {
+    visibility: hidden;
+  }
+}
+@media screen and (max-width: 450px) {
+  .container {
+    transform: translateY(88px);
+    width: 90%;
+    height: 450px;
+    padding: 40px 20px;
+    border-bottom-right-radius: 6 rem;
+  }
+  .container__input {
+    justify-content: space-between;
+  }
+  .container__input .field {
+    width: 90%;
+    height: 3rem;
+    margin-right: 15px;
+    font-size: 20px;
+    padding: 0;
+    text-align: center;
+  }
+  .container__divider {
+    margin: 3.67rem 0;
+  }
+  .container__divider__btn {
+    height: 60px;
+    width: 60px;
+    left: 40%;
+  }
+  .container__divider__btn img {
+    width: 25px;
+  }
+  .container__result {
+    font-size: 7lvw;
+    line-height: 13vw;
+  }
+  .attribution {
+    visibility: hidden;
+  }
 }/*# sourceMappingURL=main.css.map */

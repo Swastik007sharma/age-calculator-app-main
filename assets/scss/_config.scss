@@ -6,3 +6,19 @@ $Light_grey: hsl(0, 0%, 86%);
 $Smokey_grey: hsl(0, 1%, 44%);
 $Off_black: hsl(0, 0%, 8%);
 
+@mixin transition-ease {
+    transition: all 0.5s ease-in-out;
+}
+
+@mixin media-mobile {
+    @media screen and (max-width: 450px) {
+        @content;
+    }
+}
+
+@mixin media-md {
+    @media screen and (max-width: 750px) {
+        @content;
+    }
+}
+
