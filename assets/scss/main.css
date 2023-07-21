@@ -40,7 +40,7 @@ body {
   width: 130px;
   padding-left: 20px;
   margin-right: 30px;
-  margin-top: 5.5px;
+  margin: 5.5px 0 3px 0;
   font-size: 26px;
   font-weight: 700;
   border-radius: 0.3rem;
@@ -89,13 +89,24 @@ body {
   color: hsl(259, 100%, 65%);
 }
 
+.error {
+  color: hsl(0, 100%, 67%) !important;
+  border-color: hsl(0, 100%, 67%) !important;
+}
+
+.remark {
+  font-style: italic;
+  font-size: 0.65rem;
+  color: hsl(0, 100%, 67%);
+}
+
 @media screen and (max-width: 750px) {
   .container {
     transform: translateY(88px);
     width: 90%;
     height: 490px;
     padding: 40px 20px;
-    border-bottom-right-radius: 6 rem;
+    border-bottom-right-radius: 6rem;
   }
   .container__input {
     justify-content: space-between;
@@ -128,7 +139,7 @@ body {
     width: 90%;
     height: 450px;
     padding: 40px 20px;
-    border-bottom-right-radius: 6 rem;
+    border-bottom-right-radius: 6rem;
   }
   .container__input {
     justify-content: space-between;
