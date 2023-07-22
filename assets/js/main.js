@@ -145,9 +145,9 @@ function calculation(dayValue, monthValue, yearValue, date){
         let millisec = currDateInMillisec - givenDateInMillisec;
         
         let yearsToShow = parseInt(millisec/31536000000)
-        let remainingMillisec = 31536000000-(millisec%31536000000)
+        let remainingMillisec = (millisec%31536000000)
         let monthsToShow = parseInt(remainingMillisec/2628000000)
-        remainingMillisec = 2628000000-remainingMillisec%2628000000
+        remainingMillisec = remainingMillisec%2628000000
         let daysToShow = parseInt(remainingMillisec/(1000 * 60 * 60 * 24))
 
         resultYear.innerText = yearsToShow;
