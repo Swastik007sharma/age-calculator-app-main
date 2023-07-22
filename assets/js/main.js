@@ -2,89 +2,158 @@ const day = document.querySelector('#day');
 const month = document.querySelector('#month');
 const year = document.querySelector('#year');
 const button = document.querySelector('#btn');
+const resultYear = document.querySelectorAll('.result')[0];
+const resultMonth = document.querySelectorAll('.result')[1];
+const resultDay = document.querySelectorAll('.result')[2];
 
 const emptyError = "This field is required"
+const invalidYearError = "Must be in the past"
+const invalidMonthError = "Must be a valid month"
+const invalidDayError = "Must be a valid day"
 
 button.addEventListener("click", verificationAndCalculation);
 
 verifyEmpty = (elem) => (elem == '') ? true : false
 
 function verificationAndCalculation() {
-    let dayValue = day.value;
-    let monthValue = month.value;
-    let yearValue = year.value;
+    let dayValue = Number(day.value);
+    let monthValue = Number(month.value);
+    let yearValue = Number(year.value);
 
-    emptyErrorManager(dayValue, monthValue, yearValue)
+     // Create a Date object and check if it represents a valid date
+    let date = new Date(yearValue, monthValue - 1, dayValue);
+    
+    ErrorManager(dayValue, monthValue, yearValue, date)
+    calculation(dayValue, monthValue, yearValue, date)
     
     
 }
 
-function emptyErrorManager(dayValue, monthValue, yearValue) {
+function ErrorManager(dayValue, monthValue, yearValue, date) {
 
     // Applying and removing error individually
 
     if (verifyEmpty(dayValue)) {
-        addEmptyError(day, emptyError)
+        addError(day, emptyError)
     } else if (!verifyEmpty(dayValue)) { 
-        removeEmptyError(day)
+        removeError(day)
+        validateDay(dayValue, date)
     }
     if (verifyEmpty(monthValue)) {
-        addEmptyError(month, emptyError)
+        addError(month, emptyError)
     } else if (!verifyEmpty(monthValue)){ 
-        removeEmptyError(month)
+        removeError(month)
+        validateMonth(monthValue)
     }
     if (verifyEmpty(yearValue)) {
-        addEmptyError(year, emptyError)
+        addError(year, emptyError)
     } else if (!verifyEmpty(yearValue)){ 
-        removeEmptyError(year)
-    }
+        removeError(year)
+        validateYear(yearValue);
+    } 
 
     // Applying and removing error in pair
 
     if (verifyEmpty(dayValue) && verifyEmpty(monthValue)) {
-        addEmptyError(day, emptyError)
-        addEmptyError(month, emptyError)
+        addError(day, emptyError)
+        addError(month, emptyError)
     } else if (!verifyEmpty(dayValue) && !verifyEmpty(monthValue)){ 
-        removeEmptyError(day)
-        removeEmptyError(month)
+        removeError(day)
+        removeError(month)
+        validateDay(dayValue, date)
+        validateMonth(monthValue);
     }
     if (verifyEmpty(monthValue) && verifyEmpty(yearValue)) {
-        addEmptyError(month, emptyError)
-        addEmptyError(year, emptyError)
+        addError(month, emptyError)
+        addError(year, emptyError)
     } else if (!verifyEmpty(monthValue) && !verifyEmpty(yearValue)){ 
-        removeEmptyError(month)
-        removeEmptyError(year)
+        removeError(month)
+        removeError(year)
+        validateMonth(monthValue);
+        validateYear(yearValue);
     }
     if (verifyEmpty(yearValue) && verifyEmpty(dayValue)) {
-        addEmptyError(year, emptyError)
-        addEmptyError(day, emptyError)
+        addError(year, emptyError)
+        addError(day, emptyError)
     } else if (!verifyEmpty(yearValue) && !verifyEmpty(dayValue)){ 
-        removeEmptyError(year)
-        removeEmptyError(day)
+        removeError(year)
+        removeError(day)
+        validateYear(yearValue);
+        validateDay(dayValue, date);
     }
 
     // Applying and removing error to all
 
     if (verifyEmpty(dayValue) && verifyEmpty(monthValue) && verifyEmpty(yearValue)) {
-        addEmptyError(day, emptyError)
-        addEmptyError(month, emptyError)
-        addEmptyError(year, emptyError)
+        addError(day, emptyError)
+        addError(month, emptyError)
+        addError(year, emptyError)
     } else if (!verifyEmpty(dayValue) && !verifyEmpty(monthValue) && !verifyEmpty(yearValue)) {
-        removeEmptyError(day)
-        removeEmptyError(month)
-        removeEmptyError(year)
+        removeError(day)
+        removeError(month)
+        removeError(year)
+        validateDay(dayValue, date)
+        validateMonth(monthValue);
+        validateYear(yearValue);
     }
 }
 
-function addEmptyError(elem, error) {
+function addError(elem, error) {
     elem.style.borderColor = "hsl(0, 100%, 67%)";
     elem.previousElementSibling.classList.add('error');
     elem.nextElementSibling.innerText = error;
 }
-function removeEmptyError(elem) {
+function removeError(elem) {
     elem.style.borderColor = "hsl(0, 0%, 86%)";
     if(elem.previousElementSibling.classList.contains('error')){
         elem.previousElementSibling.classList.remove('error')
     }
     elem.nextElementSibling.innerText = '';
 }
+function validateYear(elm){
+    let d = new Date()
+    let currYear = d.getFullYear()
+
+    if (elm > currYear || elm < 1000){
+        addError(year, invalidYearError)
+    } else if (!elm > currYear || !elm < 1000){
+        removeError(year)
+    }
+}
+function validateMonth(elm){
+    if (elm > 12 || elm < 1){
+        addError(month, invalidMonthError)
+    } else if (!elm > 12 || !elm < 1){
+        removeError(month)
+    }
+}
+function validateDay(elm, date){
+    if (!date.getDate() == elm){
+        addError(day, invalidDayError)
+    } else if (date.getDate() == elm){
+        removeError(day)
+    }
+}
+function calculation(dayValue, monthValue, yearValue, date){
+    
+    if (date.getFullYear() === yearValue &&
+    date.getMonth() === monthValue - 1 &&
+    date.getDate() === dayValue){
+        let givenDateInMillisec = date.getTime()
+        let currDateInMillisec = Date.now()
+        
+        let millisec = currDateInMillisec - givenDateInMillisec;
+        
+        let yearsToShow = parseInt(millisec/31536000000)
+        let remainingMillisec = 31536000000-(millisec%31536000000)
+        let monthsToShow = parseInt(remainingMillisec/2628000000)
+        remainingMillisec = 2628000000-remainingMillisec%2628000000
+        let daysToShow = parseInt(remainingMillisec/(1000 * 60 * 60 * 24))
+
+        resultYear.innerText = yearsToShow;
+        resultMonth.innerText = monthsToShow;
+        resultDay.innerText = daysToShow;
+    }
+}
+
+
